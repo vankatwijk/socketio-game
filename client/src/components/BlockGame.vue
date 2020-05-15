@@ -7,6 +7,14 @@
     height="480" 
     style="border:1px solid red;">
     </canvas>
+    <p>
+      <button v-on:click="move('right')">Right</button>
+      <button v-on:click="move('left')">Left</button>
+      <button v-on:click="move('up')">Up</button>
+      <button v-on:click="move('down')">Down</button>
+    </p>
+
+
   </div>
 </template>
 
@@ -34,6 +42,11 @@ export default {
       this.context.clearRect(0,0,this.$refs.game.width,this.$refs.game.height);
       this.context.fillRect(this.position.x, this.position.y, 20, 20);
     })
+  },
+  methods:{
+    move(direction){
+      this.socket.emit("move",direction);
+    }
   }
 }
 </script>
